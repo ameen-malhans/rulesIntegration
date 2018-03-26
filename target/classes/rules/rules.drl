@@ -1,0 +1,49 @@
+package rules
+ 
+import  com.agilemaple.model.Payment
+import  com.agilemaple.service.implementation.PaymentServiceImpl
+
+rule "physical product"
+	when 
+		paymentObject: Payment(type=="physicalProduct")
+	then
+	   PaymentServiceImpl paymentServiceImpl = new PaymentServiceImpl();
+	   paymentServiceImpl.generatePackingSlip(paymentObject);
+	   paymentServiceImpl.generateCommissionPaymentToAgent(paymentObject);
+	end
+	
+rule "book"
+	when 
+		paymentObject: Payment(type=="book")
+	then
+	   PaymentServiceImpl paymentServiceImpl = new PaymentServiceImpl();
+	   paymentServiceImpl.createDuplicatePackingSlip(paymentObject);
+	   paymentServiceImpl.generateCommissionPaymentToAgent(paymentObject);
+	end
+
+rule "membership"
+	when 
+		paymentObject: Payment(type=="membership")
+	then
+	   PaymentServiceImpl paymentServiceImpl = new PaymentServiceImpl();
+	   paymentServiceImpl.activateMembership(paymentObject);
+	   paymentServiceImpl.emailToOwner(paymentObject);
+	end
+
+rule "upgrade"
+	when 
+		paymentObject: Payment(type=="upgrade")
+	then
+	   PaymentServiceImpl paymentServiceImpl = new PaymentServiceImpl();
+	   paymentServiceImpl.upgradeMembership(paymentObject);
+	   paymentServiceImpl.emailToOwner(paymentObject);
+	end
+	
+rule "video"
+	when 
+		paymentObject: Payment(type=="video")
+	then
+	   PaymentServiceImpl paymentServiceImpl = new PaymentServiceImpl();
+	   paymentServiceImpl.addFreeVideotoPackingSlip(paymentObject);
+	end	
+	
