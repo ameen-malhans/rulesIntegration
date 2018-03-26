@@ -12,7 +12,7 @@ For example if you enter payment type physicalProduct, you will see output :gene
 1) Import the project in IDE (Eclipse/Intellij)
 2) Build project using maven "mvn clean install"
 3) Launch Java Application using Tomcat Server by deploying war file
-4) Go to web browsers and visit : http://localhost:8080/droolProject/api/payment/{type} where type = physicalProduct  or   book 
+4) Go to web browsers and visit http://localhost:8080/droolProject/api/payment/{type} where type = physicalProduct  or   book 
 5) If you want to add new rules add to file : src/main/resources/rules/rules.drl
     
 ## Explaination
